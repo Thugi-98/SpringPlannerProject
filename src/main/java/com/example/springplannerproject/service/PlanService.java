@@ -6,6 +6,7 @@ import com.example.springplannerproject.repository.PlanRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,8 +62,10 @@ public class PlanService {
                 () -> new IllegalStateException("없는 플랜입니다.")
         );
 
-        if (request.getTitle() != null) plan.updateTitle(request.getTitle());
-        if (request.getWriter() != null) plan.updateWriter(request.getWriter());
+        if (request.getPassword().equals(plan.getPassword())) {
+            if (request.getTitle() != null) plan.updateTitle(request.getTitle());
+            if (request.getWriter() != null) plan.updateWriter(request.getWriter());
+        }
 
         return new UpdatePlanResponse(
                 plan.getId(),
@@ -70,7 +73,8 @@ public class PlanService {
                 plan.getContents(),
                 plan.getWriter(),
                 plan.getCreatedAt(),
-                plan.getModifiedAt());
+                plan.getModifiedAt()
+        );
     }
-
 }
+
