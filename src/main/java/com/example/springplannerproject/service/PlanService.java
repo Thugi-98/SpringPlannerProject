@@ -8,6 +8,8 @@ import com.example.springplannerproject.repository.PlanRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -32,17 +34,28 @@ public class PlanService {
     }
 
     @Transactional(readOnly = true)
-    public GetPlanResponse findOne(Long id) {
-        Plan plan = planRepository.findById(id).orElseThrow(
-                () -> new IllegalStateException("없는 일정입니다.")
-        );
-        return new GetPlanResponse(
-                plan.getId(),
-                plan.getTitle(),
-                plan.getContents(),
-                plan.getWriter(),
-                plan.getCreatedAt(),
-                plan.getModifiedAt()
-        );
+    public List<GetPlanResponse> findAll() {
+        List<Plan> plans = planRepository.findAll();
+
+        List<GetPlanResponse> dtos = new ArrayList<>();
+        for (Plan plan : plans) {
+            dtos.add(new GetPlanResponse(plan.getId(), plan.getTitle(), plan.getWriter(), plan.getContents(), plan.getCreatedAt(), plan.getModifiedAt()));
+        }
+        return dtos;
     }
+
+//    @Transactional(readOnly = true)
+//    public List<GetPlanResponse> findByWriter(String writer) {
+//        List<Plan> plans = planRepository.findAll();
+//
+//        List<GetPlanResponse> dtos = new ArrayList<>();
+//        for (Plan plan : plans) {
+//            if (plan.getWriter() == writer) {
+//                dtos.add(new GetPlanResponse(plan.getId(), plan.getTitle(), plan.getWriter(), plan.getContents(), plan.getCreatedAt(), plan.getModifiedAt()));
+//            }
+//        }
+//        return dtos;
+//    }
+
+
 }

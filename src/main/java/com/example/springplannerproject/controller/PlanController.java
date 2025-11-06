@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 public class PlanController {
@@ -22,11 +24,14 @@ public class PlanController {
         return ResponseEntity.status(HttpStatus.CREATED).body(planService.createPlan(request));
     }
 
-    @GetMapping("/plans/{id}")
-    public ResponseEntity<GetPlanResponse> getPlan(
-            @PathVariable Long id
-    ) {
-        return ResponseEntity.status(HttpStatus.OK).body(planService.findOne(id));
+    @GetMapping("/plans")
+    public ResponseEntity<List<GetPlanResponse>> getAllPlan() {
+        return ResponseEntity.status(HttpStatus.OK).body(planService.findAll());
     }
+
+//    @RequestMapping("/plans")
+//    public ResponseEntity<List<GetPlanResponse>> getPlanByWriter(@RequestParam String writer) {
+//        return ResponseEntity.status(HttpStatus.OK).body(planService.findByWriter(writer));
+//    }
 
 }
