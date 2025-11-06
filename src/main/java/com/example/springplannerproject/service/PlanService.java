@@ -4,6 +4,7 @@ import com.example.springplannerproject.dto.*;
 import com.example.springplannerproject.entity.Plan;
 import com.example.springplannerproject.repository.PlanRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,7 +35,7 @@ public class PlanService {
 
     @Transactional(readOnly = true)
     public List<GetPlanResponse> findAll() {
-        List<Plan> plans = planRepository.findAll();
+        List<Plan> plans = planRepository.findAll(Sort.by(Sort.Direction.DESC, "modifiedAt"));
 
         List<GetPlanResponse> dtos = new ArrayList<>();
         for (Plan plan : plans) {
