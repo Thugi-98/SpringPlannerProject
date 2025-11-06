@@ -1,11 +1,10 @@
 package com.example.springplannerproject.dto;
 
 import lombok.Getter;
-
 import java.time.LocalDateTime;
 
 @Getter
-public class CreatePlanResponse {
+public class UpdatePlanResponse {
 
     private final Long id;
     private final String title;
@@ -14,7 +13,7 @@ public class CreatePlanResponse {
     private final LocalDateTime createdAt;
     private final LocalDateTime modifiedAt;
 
-    public CreatePlanResponse(Long id, String title, String contents, String writer, LocalDateTime createdAt, LocalDateTime modifiedAt) {
+    public UpdatePlanResponse(Long id, String title, String contents, String writer, LocalDateTime createdAt, LocalDateTime modifiedAt) {
         this.id = id;
         this.title = title;
         this.contents = contents;

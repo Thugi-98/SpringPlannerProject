@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
 public class CreatePlanRequest {
 
     private String title;
-    private String writer;
     private String contents;
+    private String writer;
     private String password;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;

@@ -15,14 +15,14 @@ public class Plan extends BaseEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
-    private String writer;
     private String contents;
+    private String writer;
     private String password;
 
-    public Plan(String title, String writer, String contents, String password) {
+    public Plan(String title, String contents, String writer, String password) {
         this.title = title;
-        this.writer = writer;
         this.contents = contents;
+        this.writer = writer;
         this.password = password;
     }
 
@@ -30,7 +30,7 @@ public class Plan extends BaseEntity{
         this.title = title;
     }
 
-    public void updateContents(String contents) {
-        this.contents = contents;
+    public void updateWriter(String writer) {
+        this.writer = writer;
     }
 }

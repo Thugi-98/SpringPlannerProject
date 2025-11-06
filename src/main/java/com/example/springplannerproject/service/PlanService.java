@@ -1,8 +1,6 @@
 package com.example.springplannerproject.service;
 
-import com.example.springplannerproject.dto.CreatePlanRequest;
-import com.example.springplannerproject.dto.CreatePlanResponse;
-import com.example.springplannerproject.dto.GetPlanResponse;
+import com.example.springplannerproject.dto.*;
 import com.example.springplannerproject.entity.Plan;
 import com.example.springplannerproject.repository.PlanRepository;
 import lombok.RequiredArgsConstructor;
@@ -57,5 +55,22 @@ public class PlanService {
 //        return dtos;
 //    }
 
+    @Transactional
+    public UpdatePlanResponse updatePlan(Long id, UpdatePlanRequest request) {
+        Plan plan = planRepository.findById(id).orElseThrow(
+                () -> new IllegalStateException("없는 플랜입니다.")
+        );
+
+        if (request.getTitle() != null) plan.updateTitle(request.getTitle());
+        if (request.getWriter() != null) plan.updateWriter(request.getWriter());
+
+        return new UpdatePlanResponse(
+                plan.getId(),
+                plan.getTitle(),
+                plan.getContents(),
+                plan.getWriter(),
+                plan.getCreatedAt(),
+                plan.getModifiedAt());
+    }
 
 }

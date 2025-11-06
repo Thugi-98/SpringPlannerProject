@@ -1,8 +1,6 @@
 package com.example.springplannerproject.controller;
 
-import com.example.springplannerproject.dto.CreatePlanRequest;
-import com.example.springplannerproject.dto.CreatePlanResponse;
-import com.example.springplannerproject.dto.GetPlanResponse;
+import com.example.springplannerproject.dto.*;
 import com.example.springplannerproject.service.PlanService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -33,5 +31,13 @@ public class PlanController {
 //    public ResponseEntity<List<GetPlanResponse>> getPlanByWriter(@RequestParam String writer) {
 //        return ResponseEntity.status(HttpStatus.OK).body(planService.findByWriter(writer));
 //    }
+
+    @PatchMapping("/plans/{id}")
+    public ResponseEntity<UpdatePlanResponse> updatePlan(
+            @PathVariable Long id,
+            @RequestBody UpdatePlanRequest request
+    ) {
+        return ResponseEntity.status(HttpStatus.OK).body(planService.updatePlan(id, request));
+    }
 
 }
