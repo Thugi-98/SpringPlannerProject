@@ -57,6 +57,21 @@ public class PlanService {
 //    }
 
     @Transactional
+    public GetPlanResponse findOne(Long id) {
+        Plan plan = planRepository.findById(id).orElseThrow(
+                () -> new IllegalStateException("없는 플랜입니다.")
+        );
+        return new GetPlanResponse(
+                plan.getId(),
+                plan.getTitle(),
+                plan.getWriter(),
+                plan.getContents(),
+                plan.getCreatedAt(),
+                plan.getModifiedAt()
+        );
+    }
+
+    @Transactional
     public UpdatePlanResponse updatePlan(Long id, UpdatePlanRequest request) {
         Plan plan = planRepository.findById(id).orElseThrow(
                 () -> new IllegalStateException("없는 플랜입니다.")
@@ -78,13 +93,13 @@ public class PlanService {
     }
 
     @Transactional
-    public void delete(Long id) {
-        boolean existence = planRepository.existsById(id);
+    public void delete(Long id, DeletePlanRequest request) {
+        Plan plan = planRepository.findById(id).orElseThrow(
+                () -> new IllegalStateException("없는 플랜입니다.")
+        );
 
-        if (!existence) {
-            throw new IllegalStateException("없는 플랜입니다.");
-        }
-
-        planRepository.deleteById(id);
+        if (request.getPassword().equals(plan.getPassword()))
+            planRepository.deleteById(id);
     }
+
 }

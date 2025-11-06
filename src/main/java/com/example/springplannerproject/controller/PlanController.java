@@ -32,6 +32,13 @@ public class PlanController {
 //        return ResponseEntity.status(HttpStatus.OK).body(planService.findByWriter(writer));
 //    }
 
+    @GetMapping("/plans/{id}")
+    public ResponseEntity<GetPlanResponse> getOnePlan(
+            @PathVariable Long id
+    ) {
+        return ResponseEntity.status(HttpStatus.OK).body(planService.findOne(id));
+    }
+
     @PatchMapping("/plans/{id}")
     public ResponseEntity<UpdatePlanResponse> updatePlan(
             @PathVariable Long id,
@@ -41,8 +48,11 @@ public class PlanController {
     }
 
     @DeleteMapping("/plans/{id}")
-    public ResponseEntity<Void> deleteMemo(@PathVariable Long id) {
-        planService.delete(id);
+    public ResponseEntity<Void> deleteMemo(
+            @PathVariable Long id,
+            @RequestBody DeletePlanRequest request
+    ) {
+        planService.delete(id, request);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
