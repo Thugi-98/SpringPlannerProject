@@ -76,5 +76,15 @@ public class PlanService {
                 plan.getModifiedAt()
         );
     }
-}
 
+    @Transactional
+    public void delete(Long id) {
+        boolean existence = planRepository.existsById(id);
+
+        if (!existence) {
+            throw new IllegalStateException("없는 플랜입니다.");
+        }
+
+        planRepository.deleteById(id);
+    }
+}

@@ -40,4 +40,10 @@ public class PlanController {
         return ResponseEntity.status(HttpStatus.OK).body(planService.updatePlan(id, request));
     }
 
+    @DeleteMapping("/plans/{id}")
+    public ResponseEntity<Void> deleteMemo(@PathVariable Long id) {
+        planService.delete(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
 }
