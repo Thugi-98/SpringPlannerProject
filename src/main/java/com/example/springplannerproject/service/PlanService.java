@@ -25,7 +25,8 @@ public class PlanService {
                 savedPlan.getTitle(),
                 savedPlan.getContents(),
                 savedPlan.getWriter(),
-                savedPlan.getPassword()
+                savedPlan.getCreatedAt(),
+                savedPlan.getModifiedAt()
         );
 
     }
@@ -40,8 +41,8 @@ public class PlanService {
                 plan.getTitle(),
                 plan.getContents(),
                 plan.getWriter(),
-                plan.getPostWhen(),
-                plan.getEditWhen()
+                plan.getCreatedAt(),
+                plan.getModifiedAt()
         );
     }
 }

@@ -2,6 +2,8 @@ package com.example.springplannerproject.dto;
 
 import lombok.Getter;
 
+import java.time.LocalDateTime;
+
 @Getter
 public class CreatePlanResponse {
 
@@ -9,15 +11,15 @@ public class CreatePlanResponse {
     private final String title;
     private final String contents;
     private final String writer;
-    private final String password;
-//    private final Date postDate;
-//    private final Date editDate;
+    private final LocalDateTime createdAt;
+    private final LocalDateTime modifiedAt;
 
-    public CreatePlanResponse(Long id, String title, String contents, String writer, String password) {
+    public CreatePlanResponse(Long id, String title, String contents, String writer, LocalDateTime createdAt, LocalDateTime modifiedAt) {
         this.id = id;
         this.title = title;
         this.contents = contents;
         this.writer = writer;
-        this.password = password;
+        this.createdAt = createdAt;
+        this.modifiedAt = modifiedAt;
     }
 }
